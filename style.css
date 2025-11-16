@@ -33,13 +33,49 @@ input, select {
 }
 
 #tape {
-    background: black;
-    padding: 15px;
-    font-size: 22px;
-    margin-top: 10px;
-    border-radius: 8px;
-    min-height: 40px;
+    display: flex;
+    justify-content: center;
+    gap: 4px;
+    margin: 20px auto;
+    flex-wrap: nowrap;   /* evita que se rompa la fila */
 }
+
+.tape-cell {
+    width: 35px;
+    height: 35px;
+    border: 2px solid #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    background: rgb(0, 0, 0);
+}
+
+
+
+.tape-cell.head {
+    border-color: cyan;
+    background: #003b48;
+}
+
+#stateBox {
+    width: 150px;
+    height: 150px;
+    background: #eee;
+    color: #333;
+    padding: 20px;
+    border-radius: 10px;
+    margin: 20px auto; 
+    font-size: 18px;
+    text-align: left;
+}
+
+
+#stateBox {
+    margin-left: auto;
+    margin-right: auto;
+}
+
 
 #state, #result {
     padding: 10px;

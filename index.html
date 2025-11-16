@@ -17,6 +17,7 @@
             <option value="password">Contraseña simple (8+ alfanuméricos)</option>
             <option value="user">Tipo usuario (admin | guest | user)</option>
             <option value="inventario">Código inventario (INV-###)</option>
+            <option value="shift">Desplazamiento Visual</option>
         </select>
 
         <label for="inputString">Cadena a validar:</label>
@@ -33,6 +34,10 @@
         <div id="tape"></div>
 
         <h3>Estado actual:</h3>
+        <div id="stateBox">
+            <div id="stateText">Esperando...</div>
+        </div>
+        
         <div id="state"></div>
 
         <h3>Resultado:</h3>
