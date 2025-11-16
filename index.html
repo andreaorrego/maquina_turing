@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Simulador de Máquina de Turing - Validación Regex</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <h1>Simulador de Máquina de Turing</h1>
+
+    <div class="container">
+
+        <label for="regexSelect">Selecciona el tipo de Regex a validar:</label>
+        <select id="regexSelect">
+            <option value="pin">PIN (4 o 6 dígitos)</option>
+            <option value="password">Contraseña simple (8+ alfanuméricos)</option>
+            <option value="user">Tipo usuario (admin | guest | user)</option>
+            <option value="inventario">Código inventario (INV-###)</option>
+        </select>
+
+        <label for="inputString">Cadena a validar:</label>
+        <input type="text" id="inputString">
+
+        <div class="buttons">
+            <button id="loadBtn">Cargar</button>
+            <button id="stepBtn">Paso</button>
+            <button id="runBtn">Ejecutar</button>
+            <button id="resetBtn">Reiniciar</button>
+        </div>
+
+        <h3>Cinta:</h3>
+        <div id="tape"></div>
+
+        <h3>Estado actual:</h3>
+        <div id="state"></div>
+
+        <h3>Resultado:</h3>
+        <div id="result"></div>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
