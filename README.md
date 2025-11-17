@@ -1,5 +1,7 @@
 Simulador de Máquina de Turing para 4 Regex
 
+Presentado por: Andrea Orrego Franco
+
 Este proyecto implementa un simulador web que ejecuta una Máquina de Turing restringida 
 (que no escribe símbolos nuevos ni se mueve a la izquierda) para validar 4 expresiones 
 regulares usadas en formularios web:
