@@ -13,11 +13,11 @@
 
         <label for="regexSelect">Selecciona el tipo de Regex a validar:</label>
         <select id="regexSelect">
+            <option value="shift">Escoge una opción</option>
             <option value="pin">PIN (4 o 6 dígitos)</option>
             <option value="password">Contraseña simple (8+ alfanuméricos)</option>
             <option value="user">Tipo usuario (admin | guest | user)</option>
             <option value="inventario">Código inventario (INV-###)</option>
-            <option value="shift">Desplazamiento Visual</option>
         </select>
 
         <div id="inputContainer">
@@ -33,7 +33,9 @@
         </div>
 
         <h3>Cinta:</h3>
-        <div id="tape"></div>
+        <div id="tapeContainer">
+            <div id="tape" class="tape"></div>
+        </div>
 
         <h3>Estado actual:</h3>
         <div id="stateBox">

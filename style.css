@@ -37,7 +37,7 @@ input, select {
     justify-content: center;
     gap: 4px;
     margin: 20px auto;
-    flex-wrap: nowrap;   /* evita que se rompa la fila */
+    flex-wrap: nowrap; 
 }
 
 .tape-cell {
@@ -50,8 +50,6 @@ input, select {
     font-size: 20px;
     background: rgb(0, 0, 0);
 }
-
-
 
 .tape-cell.head {
     border-color: cyan;
@@ -70,12 +68,10 @@ input, select {
     text-align: left;
 }
 
-
 #stateBox {
     margin-left: auto;
     margin-right: auto;
 }
-
 
 #state, #result {
     padding: 10px;

@@ -1,7 +1,7 @@
 export const inventarioMachine = {
     start: "q0",
     accept: "qA",
-    error: "qE",
+    reject: "qE",
     transitions: {
         "q0": { I:["q1","R"] },
         "q1": { N:["q2","R"] },
@@ -9,6 +9,9 @@ export const inventarioMachine = {
         "q3": { "-":["q4","R"] },
 
         "q4": { d:["q5","R"] },
-        "q5": { d:["q5","R"], B:["qA","S"] }
+        "q5": { d:["q6","R"] },
+        "q6": { d:["q7","R"] },  // seguimos leyendo, aceptación la controla el script
+        "q7": { _: ["qA","S"] }  // opcional, si quieres forzar el BLANK final
+
     }
 };

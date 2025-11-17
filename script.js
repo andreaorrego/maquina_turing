@@ -23,25 +23,22 @@ const machines = {
 };
 
 let tape = [];
-let head = 2;
+let head = 0;
 let state = "";
 let activeMachine = null;
-
-let step = 0;        // 🟦 contador de pasos
-let pinLength = 0;   // 🟦 contador de dígitos leídos
+let step = 0;
+let pinLength = 0;
+const BLANK = "_"; // símbolo de cinta blanca
 
 document.getElementById("loadBtn").onclick = () => {
-
     const input = document.getElementById("inputString").value.trim();
     const mode = document.getElementById("regexSelect").value;
 
     activeMachine = machines[mode];
-
-    tape = ["B", "B", ...input.split(""), "B", "B"]; 
-    head = 1; 
+    const padding = 3;
+    tape = [...Array(padding).fill(BLANK), ...input.split(""), ...Array(padding).fill(BLANK)];
+    head = padding;
     state = activeMachine.start;
-
-    // Reiniciar contadores
     step = 0;
     pinLength = 0;
 
@@ -49,95 +46,89 @@ document.getElementById("loadBtn").onclick = () => {
 };
 
 document.getElementById("stepBtn").onclick = () => {
-
     if (!activeMachine) return;
+    if (state === activeMachine.accept || state === activeMachine.reject) return;
 
-    let symbol = tape[head] || "B";
-    let rules = activeMachine.transitions[state];
+    let symbol = tape[head] ?? BLANK;
+    let isLetterOrDigit = false;
 
-    // 🟦 Si lee un dígito, incrementar contador
-    if (!isNaN(symbol)) pinLength++;
+    if (activeMachine === pinMachine || activeMachine === passwordMachine || activeMachine === inventarioMachine) {
+        if (/[0-9]/.test(symbol)) {
+            symbol = "d";
+            isLetterOrDigit = true;
+        } else if (/[a-zA-Z]/.test(symbol) && activeMachine !== inventarioMachine) {
+            symbol = "l";  // solo para PIN/Password
+            isLetterOrDigit = true;
+        }
+    }
+    
 
-    // 🟦 ACTUALIZAR PANEL DE ESTADO AQUÍ
-    updateStateBox({
-        step,
-        state,
-        head,
-        symbol,
-        pinLength
-    });
+    if (isLetterOrDigit) pinLength++;
 
-    step++; // aumentar contador
+    // Mostrar estado antes de ejecutar la transición
+    updateStateBox({ step, state, head, symbol, pinLength });
+    step++;
 
+    const rules = activeMachine.transitions[state];
     if (!rules || !rules[symbol]) {
-        updateUI("Sin transición…");
+        state = activeMachine.reject;
+        updateUI("Rechazado");
         return;
     }
 
-    const [nextState, move] = rules[symbol];
-
-    if (nextState === activeMachine.accept) {
-        tape.push("B");
-    }
-
+    const [nextState, move, writeSymbol] = rules[symbol];
+    tape[head] = writeSymbol ?? tape[head];
     state = nextState;
 
+    // Mover head
     if (move === "R") head++;
+    else if (move === "L") head--;
 
-    updateUI(state === activeMachine.accept ? "Aceptado" : "Ejecutando…");
+    if (head < 0) { tape.unshift(BLANK); head = 0; }
+    else if (head >= tape.length) tape.push(BLANK);
+
+    // Actualizar UI según estado
+    if (state === activeMachine.accept) updateUI("Aceptado");
+    else if (state === activeMachine.reject) updateUI("Rechazado");
+    else updateUI("Ejecutando…");
 };
 
-// Reiniciar
 document.getElementById("resetBtn").onclick = () => {
     tape = [];
     head = 0;
     state = "";
     activeMachine = null;
-
     step = 0;
     pinLength = 0;
-
     updateUI("Reiniciado");
 };
 
 function renderTape() {
     const tapeDiv = document.getElementById("tape");
     tapeDiv.innerHTML = "";
-
-    // Tamaño fijo de ventana visible
-    const WINDOW = 21;
-
-    // Centrar la ventana alrededor del head
+    const WINDOW = 15;
     const half = Math.floor(WINDOW / 2);
-
     const start = head - half;
     const end = head + half;
 
     for (let i = start; i <= end; i++) {
         const cell = document.createElement("div");
         cell.className = "tape-cell";
-
-        let symbol = tape[i] ?? "B";
-        cell.textContent = symbol;
-
-        // El head SIEMPRE en la celda central
+        cell.textContent = tape[i] ?? BLANK;
         if (i === head) {
             cell.style.background = "#a7c7ff";
             cell.style.border = "3px solid #0057ff";
         }
-
         tapeDiv.appendChild(cell);
     }
 }
 
 function updateUI(msg) {
-    renderTape();   // ⬅️ ahora la cinta se mueve
-
+    renderTape();
     document.getElementById("state").innerText = state;
     document.getElementById("result").innerText = msg;
 
-    if (state === "qA") document.getElementById("result").className = "accept";
-    else if (state === "qE") document.getElementById("result").className = "reject";
+    if (state === activeMachine.accept) document.getElementById("result").className = "accept";
+    else if (state === activeMachine.reject) document.getElementById("result").className = "reject";
     else document.getElementById("result").className = "";
 }
-
