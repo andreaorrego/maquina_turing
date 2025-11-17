@@ -28,7 +28,7 @@ let state = "";
 let activeMachine = null;
 let step = 0;
 let pinLength = 0;
-const BLANK = "_"; // símbolo de cinta blanca
+const BLANK = "_"; 
 
 document.getElementById("loadBtn").onclick = () => {
     const input = document.getElementById("inputString").value.trim();
@@ -57,15 +57,13 @@ document.getElementById("stepBtn").onclick = () => {
             symbol = "d";
             isLetterOrDigit = true;
         } else if (/[a-zA-Z]/.test(symbol) && activeMachine !== inventarioMachine) {
-            symbol = "l";  // solo para PIN/Password
+            symbol = "l"; 
             isLetterOrDigit = true;
         }
     }
-    
 
     if (isLetterOrDigit) pinLength++;
 
-    // Mostrar estado antes de ejecutar la transición
     updateStateBox({ step, state, head, symbol, pinLength });
     step++;
 
@@ -80,14 +78,12 @@ document.getElementById("stepBtn").onclick = () => {
     tape[head] = writeSymbol ?? tape[head];
     state = nextState;
 
-    // Mover head
     if (move === "R") head++;
     else if (move === "L") head--;
 
     if (head < 0) { tape.unshift(BLANK); head = 0; }
     else if (head >= tape.length) tape.push(BLANK);
 
-    // Actualizar UI según estado
     if (state === activeMachine.accept) updateUI("Aceptado");
     else if (state === activeMachine.reject) updateUI("Rechazado");
     else updateUI("Ejecutando…");

@@ -11,6 +11,6 @@ export const passwordMachine = {
         q5: { l:["q6","R"], d:["q6","R"] },
         q6: { l:["q7","R"], d:["q7","R"] },
         q7: { l:["q8","R"], d:["q8","R"] },
-        q8: { l:["q8","R"], d:["q8","R"], _: ["qA","S"] }  // acepta al menos 8
+        q8: { l:["q8","R"], d:["q8","R"], _: ["qA","S"] } 
     }
 };
