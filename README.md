@@ -3,26 +3,52 @@
 ## 1. Diagramas AFD (ASCII)
 
 ### a) PIN (4 o 6 dígitos)
-q0 --d--> q1 --d--> q2 --d--> q3 --d--> q4 --d--> q5 --d--> q6
-| | |
-| | |
-qE qE qA
+q0 --d--> q1 --d--> q2 --d--> q3 --d--> q4 --d--> q5 --d--> q6 --D--> qE
+                                         |                   |
+                                         _                   _
+                                         |                   |
+                                        qA                   qA
 - `qA` → aceptación (4 o 6 dígitos)  
 - `qE` → rechazo (otra longitud)
 
 ### b) Password (mínimo 8 caracteres alfanuméricos)
-q0 --d/l--> q1 --d/l--> q2 --d/l--> q3 --d/l--> q4 --d/l--> q5 --d/l--> q6 --d/l--> q7 --d/l--> q8 -- _ --> qA
+q0 --d,l--> q1 --d,l--> q2 --d,l--> q3 --d,l--> q4 --d,l--> q5 --d,l--> q6 --d,l--> q7 --d,l--> q8 --d,l--> q8 --_--> qA
+                                                                                     |                 
+                                                                                     _                  
+                                                                                     |                  
+                                                                                    qE                  
+
 - Cada `d/l` significa que puede ser dígito (`d`) o letra (`l`)  
 - `_` = símbolo blanco que indica fin de la cadena
 
 ### c) User (admin, guest, user)
-admin: q0-a->q1-d->q2-m->q3-i->q4-n->qA
-guest: q0-g->q5-u->q6-e->q7-s->q8-t->qA
-user: q0-u->q9-s->q10-e->q11-r->qA
+admin: q0 --a--> q1 --d--> q2 --m--> q3 --i--> q4 --n--> qA .
+                                               |
+                                               l
+                                               |
+                                               qE
+                                               
+guest: q0 --g--> q5 --u--> q6 --e--> q7 --s--> q8 --t--> qA .
+                                               |
+                                               l
+                                               |
+                                               qE
+                                               
+user: q0 --u--> q9 --s--> q10 --e--> q11 --r--> qA .
+                                      |
+                                      l
+                                      |
+                                     qE
+
+- `l` = cualquier letra.  
 
 ### d) Inventario (INV-###)
-q0-I->q1-N->q2-V->q3- ->q4-d->q5-d->qA
-
+q0 --I--> q1 --N--> q2 --V--> q3 -- - --> q4 --d--> q5 --d--> q6 --d--> q7 --_--> qA
+                                                                         |
+                                                                         d
+                                                                         |
+                                                                         qE
+                                                                         
 - `d` = cualquier dígito  
 - `_` = símbolo blanco al final de la cadena
 
@@ -43,8 +69,6 @@ q0-I->q1-N->q2-V->q3- ->q4-d->q5-d->qA
 | q5     | _       | qE              | S          | _              |
 | q6     | _       | qA              | S          | _              |
 
----
-
 ### b) Password (mínimo 8 caracteres alfanuméricos)
 
 | Estado | Símbolo | Estado Siguiente | Movimiento | Símbolo Escrito |
@@ -58,8 +82,6 @@ q0-I->q1-N->q2-V->q3- ->q4-d->q5-d->qA
 | q6     | d/l     | q7              | R          | d/l            |
 | q7     | d/l     | q8              | R          | d/l            |
 | q8     | _       | qA              | S          | _              |
-
----
 
 ### c) User (admin, guest, user)
 
@@ -80,8 +102,6 @@ q0-I->q1-N->q2-V->q3- ->q4-d->q5-d->qA
 | q10    | e       | q11             | R          | e              |
 | q11    | r       | qA              | S          | r              |
 
----
-
 ### d) Inventario (INV-###)
 
 | Estado | Símbolo | Estado Siguiente | Movimiento | Símbolo Escrito |
@@ -91,8 +111,10 @@ q0-I->q1-N->q2-V->q3- ->q4-d->q5-d->qA
 | q2     | V       | q3              | R          | V              |
 | q3     | -       | q4              | R          | -              |
 | q4     | d       | q5              | R          | d              |
-| q5     | d       | qA              | S          | d              |
-| q5     | _       | qA              | S          | _              |
+| q5     | d       | q6              | R          | d              |
+| q6     | d       | q7              | R          | d              |
+| q7     | _       | qA              | S          | _              |
+| q7     | d,l     | qE              | S          | _              |
 
 **Notas generales:**  
 - `_` = símbolo blanco en la cinta.  
