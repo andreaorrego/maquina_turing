@@ -5,25 +5,14 @@
 ### a) PIN (4 o 6 dígitos)
 ![PIN](imagenes/pin.png)
 
-- `qA` → aceptación (4 o 6 dígitos)  
-- `qE` → rechazo (otra longitud)
-
 ### b) Password (mínimo 8 caracteres alfanuméricos)
 ![Password](imagenes/password.png)
         
-- Cada `d/l` significa que puede ser dígito (`d`) o letra (`l`)  
-- `_` = símbolo blanco que indica fin de la cadena
-
 ### c) User (admin, guest, user)
 ![User](imagenes/user.jpeg)
 
-- `l` = cualquier letra.  
-
 ### d) Inventario (INV-###)
 ![Inventario](imagenes/inventario.png)
-                                                                         
-- `d` = cualquier dígito  
-- `_` = símbolo blanco al final de la cadena
 
 ## 2. Tabla de transición completa de las MT
 
@@ -100,3 +89,4 @@
 
 **Autor:** Andrea Orrego Franco 
 **Repositorio:** https://github.com/andreaorrego/maquina_turing.git
+**Página:** https://andreaorrego.github.io/maquina_turing/
