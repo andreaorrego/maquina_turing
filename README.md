@@ -3,11 +3,8 @@
 ## 1. Diagramas AFD (ASCII)
 
 ### a) PIN (4 o 6 dígitos)
-q0 --d--> q1 --d--> q2 --d--> q3 --d--> q4 --d--> q5 --d--> q6 --D--> qE
-                                         |                   |
-                                         _                   _
-                                         |                   |
-                                        qA                   qA
+![Descripción](imagenes/pin.png)
+
 - `qA` → aceptación (4 o 6 dígitos)  
 - `qE` → rechazo (otra longitud)
 
