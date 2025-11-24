@@ -3,24 +3,24 @@
 ## 1. Diagramas AFD (ASCII)
 
 ### a) PIN (4 o 6 dígitos)
-(imagenes/pin.png)
+![PIN](imagenes/pin.png)
 
 - `qA` → aceptación (4 o 6 dígitos)  
 - `qE` → rechazo (otra longitud)
 
 ### b) Password (mínimo 8 caracteres alfanuméricos)
-(imagenes/password.png)
+![Password](imagenes/password.png)
         
 - Cada `d/l` significa que puede ser dígito (`d`) o letra (`l`)  
 - `_` = símbolo blanco que indica fin de la cadena
 
 ### c) User (admin, guest, user)
-(imagenes/user.jpeg)
+![User](imagenes/user.jpeg)
 
 - `l` = cualquier letra.  
 
 ### d) Inventario (INV-###)
-(imagenes/inventario.png)
+![Inventario](imagenes/inventario.png)
                                                                          
 - `d` = cualquier dígito  
 - `_` = símbolo blanco al final de la cadena
