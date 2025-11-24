@@ -3,48 +3,24 @@
 ## 1. Diagramas AFD (ASCII)
 
 ### a) PIN (4 o 6 dígitos)
-![Descripción](imagenes/pin.png)
+(imagenes/pin.png)
 
 - `qA` → aceptación (4 o 6 dígitos)  
 - `qE` → rechazo (otra longitud)
 
 ### b) Password (mínimo 8 caracteres alfanuméricos)
-q0 --d,l--> q1 --d,l--> q2 --d,l--> q3 --d,l--> q4 --d,l--> q5 --d,l--> q6 --d,l--> q7 --d,l--> q8 --d,l--> q8 --_--> qA
-                                                                                     |                 
-                                                                                     _                  
-                                                                                     |                  
-                                                                                    qE                  
-
+(imagenes/password.png)
+        
 - Cada `d/l` significa que puede ser dígito (`d`) o letra (`l`)  
 - `_` = símbolo blanco que indica fin de la cadena
 
 ### c) User (admin, guest, user)
-admin: q0 --a--> q1 --d--> q2 --m--> q3 --i--> q4 --n--> qA .
-                                               |
-                                               l
-                                               |
-                                               qE
-                                               
-guest: q0 --g--> q5 --u--> q6 --e--> q7 --s--> q8 --t--> qA .
-                                               |
-                                               l
-                                               |
-                                               qE
-                                               
-user: q0 --u--> q9 --s--> q10 --e--> q11 --r--> qA .
-                                      |
-                                      l
-                                      |
-                                     qE
+(imagenes/user.jpeg)
 
 - `l` = cualquier letra.  
 
 ### d) Inventario (INV-###)
-q0 --I--> q1 --N--> q2 --V--> q3 -- - --> q4 --d--> q5 --d--> q6 --d--> q7 --_--> qA
-                                                                         |
-                                                                         d
-                                                                         |
-                                                                         qE
+(imagenes/inventario.png)
                                                                          
 - `d` = cualquier dígito  
 - `_` = símbolo blanco al final de la cadena
