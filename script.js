@@ -35,12 +35,22 @@ document.getElementById("loadBtn").onclick = () => {
     const mode = document.getElementById("regexSelect").value;
 
     activeMachine = machines[mode];
-    const padding = 3;
-    tape = [...Array(padding).fill(BLANK), ...input.split(""), ...Array(padding).fill(BLANK)];
-    head = padding;
-    state = activeMachine.start;
+
+    const stateBox = document.getElementById("stateText");
+    if (stateBox) stateBox.innerHTML = "";
+
     step = 0;
     pinLength = 0;
+
+    const padding = 3;
+    tape = [
+        ...Array(padding).fill(BLANK),
+        ...input.split(""),
+        ...Array(padding).fill(BLANK)
+    ];
+
+    head = padding;
+    state = activeMachine.start;
 
     updateUI("Cargado correctamente");
 };
@@ -89,14 +99,50 @@ document.getElementById("stepBtn").onclick = () => {
     else updateUI("Ejecutando…");
 };
 
+document.getElementById("runBtn").onclick = () => {
+    // Ejecutar hasta que termine
+    while (
+        state !== activeMachine.accept &&
+        state !== activeMachine.reject
+    ) {
+        document.getElementById("stepBtn").click();
+    }
+};
+
 document.getElementById("resetBtn").onclick = () => {
+
+    activeMachine = null;
     tape = [];
     head = 0;
     state = "";
-    activeMachine = null;
     step = 0;
     pinLength = 0;
-    updateUI("Reiniciado");
+
+    const stateBox = document.getElementById("stateText");
+    if (stateBox) stateBox.innerHTML = "";
+
+    updateUI("Reiniciada");
+};
+
+document.getElementById("regexSelect").onchange = () => {
+    const mode = document.getElementById("regexSelect").value;
+    const diagram = document.getElementById("diagramImage");
+
+    if (mode === "pin") {
+        diagram.src = "./imagenes/pin.png";
+    } 
+    else if (mode === "password") {
+        diagram.src = "./imagenes/password.png";
+    } 
+    else if (mode === "user") {
+        diagram.src = "./imagenes/user.jpeg";
+    } 
+    else if (mode === "inventario") {
+        diagram.src = "./imagenes/inventario.png";
+    } 
+    else {
+        diagram.src = "";
+    }
 };
 
 function renderTape() {
@@ -118,6 +164,8 @@ function renderTape() {
         tapeDiv.appendChild(cell);
     }
 }
+
+
 
 function updateUI(msg) {
     renderTape();
